@@ -45,7 +45,7 @@ Frameworks and Technologies:
 Servers:
 1) Heroku
 
-Live Website: https://javascript-angular5-task-list-app.herokuapp.com/
+Live Website: https://javascript-angular5-task-list.herokuapp.com/
 
 Instructions to run on local machine:
 1) Extract source code
