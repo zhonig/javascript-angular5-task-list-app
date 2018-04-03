@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="col-md-12">
+    <h1>My Tasks</h1>
+    <div *ngIf="!showForm()">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th *ngFor="let column of taskColumns" class="text-center" (click)="updateOrder(column)">
+              {{ column.value }}
+              <span class="fa" [hidden]="column.key !== columnOrder" [ngClass]="{'fa-sort-up': reverseColumnOrder, 'fa-sort-down': !reverseColumnOrder }"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks | orderBy: columnOrder:reverseColumnOrder:'case-insensitive'" [class.done]="task.done">       
+            <td>{{ task.name }}</td>
+            <td>{{ task.due | date: 'EE, MMM dd' }}</td>       
+            <td>{{ task.notes }}</td>
+            <td class="text-center">
+              <input type="checkbox" [checked]="task.done" (click)="toggleTask(task)">
+            </td>
+            <td class="text-center">
+              <button class="btn btn-info" (click)="showEditForm(task)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-danger" (click)="removeTask(task)">
+                <i class="fa fa-remove"></i>
+              </button>
+            </td>       
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" (click)="showNewForm()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+    <form *ngIf="showForm()" [formGroup]="formGroup" (ngSubmit)="saveTask(formGroup.value)">
+      <div>
+        <h2>{{ headerText }}</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input class="form-control" type="text" name="name" formControlName="name" required />
+            <control-messages [control]="formGroup.controls.name"></control-messages>
+        </div>
+        <div class="form-group">
+            <label for="due">Due:</label>
+            <input class="form-control" type="date" name="due" formControlName="due" />
+        </div>
+        <div class="form-group">
+            <label for="done">Done:</label>
+            <input type="checkbox" name="done" formControlName="done" />
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <input class="form-control" type="text" name="notes" formControlName="notes" />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid">Save</button>
+        <button type="button" class="btn btn-warning" (click)="cancelEditTask()">Cancel</button>
+      </div>
+    </form>
+  </div>
+ </div>
