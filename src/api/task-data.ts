@@ -3,8 +3,8 @@ import { Task } from '../app/task/task';
 export const TASKS: Task[] = [
  {
    id: 1,
-   name: 'Lunch with Yvonne',
-   notes: 'Italian Food',
+   name: 'Lunch with Zack',
+   notes: 'Steakhouse',
    due: new Date(new Date().setDate(new Date().getDate() + 4)),
    done: false
  }, {
@@ -15,7 +15,7 @@ export const TASKS: Task[] = [
    done: false
  }, {
    id: 3,
-   name: 'Do the groceries',
+   name: 'Go grocery shopping',
    notes: '',
    due: new Date(new Date().setDate(new Date().getDate() - 1)),
    done: true
